@@ -11,6 +11,12 @@ import { BannerService } from './services/banner/banner.service';
 import { NavigationMenuSchema } from './schemas/navigation_menu.schema';
 import { NavigationMenuService } from './services/navigation_menu/navigation_menu.service';
 import { NavigationMenuController } from './controllers/navigation_menu/navigation_menu.controller';
+import { CategorySchema } from './schemas/category.schema';
+import { CategoryService } from './services/category/category.service';
+import { CategoryController } from './controllers/category/category.controller';
+import { ProductService } from './services/product/product.service';
+import { ProductController } from './controllers/product/product.controller';
+import { ProductSchema } from './schemas/product.schema';
 
 // 使用@Module装饰器定义模块，配置它的依赖和提供的服务
 @Module({
@@ -28,10 +34,30 @@ import { NavigationMenuController } from './controllers/navigation_menu/navigati
         name: 'NavigationMenu',
         schema: NavigationMenuSchema,
       },
+      {
+        name: 'Category',
+        schema: CategorySchema,
+      },
+      {
+        name: 'Product',
+        schema: ProductSchema,
+      },
     ]),
   ],
-  controllers: [AppController, BannerController, NavigationMenuController], // 指定该模块使用的控制器
-  providers: [AppService, BannerService, NavigationMenuService], // 指定该模块使用的服务提供者
+  controllers: [
+    AppController,
+    BannerController,
+    NavigationMenuController,
+    CategoryController,
+    ProductController,
+  ], // 指定该模块使用的控制器
+  providers: [
+    AppService,
+    BannerService,
+    NavigationMenuService,
+    CategoryService,
+    ProductService,
+  ], // 指定该模块使用的服务提供者
 })
 // 导出模块类，以供Nest应用工厂创建实例的时候使用
 export class AppModule {}
