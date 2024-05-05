@@ -30,4 +30,15 @@ export class ProductController {
       data,
     };
   }
+
+  // 查询最新的6个精品商品
+  @Get('premium')
+  async findPremium(): Promise<HttpResponse<Product[]>> {
+    const data = await this.productService.findPremiumProducts();
+    return {
+      success: true,
+      message: 'Premium products retrieved successfully',
+      data,
+    };
+  }
 }

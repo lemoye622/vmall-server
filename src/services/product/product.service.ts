@@ -21,4 +21,12 @@ export class ProductService {
       return newProduct.save();
     }
   }
+
+  async findPremiumProducts(): Promise<Product[]> {
+    return this.productModel
+      .find({ isPremium: true, isActive: true })
+      .sort({ createdAt: -1 }) // 按照创建时间降序排列,创建越晚的越靠前
+      .limit(6)
+      .exec();
+  }
 }
