@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ProductService } from 'src/services/product/product.service';
 import { HttpResponse } from 'src/types/http_response.interface';
 import { Product } from 'src/types/product.interface';
@@ -41,4 +41,25 @@ export class ProductController {
       data,
     };
   }
+
+  // 查询猜你喜欢的商品
+  @Get('recommended')
+  async findRecommended(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 4,
+  ): Promise<HttpResponse<Product[]>> {
+    await sleep(3000);
+    const data = await this.productService.findRecommendedProducts(page, limit);
+    return {
+      success: true,
+      message: 'Recommended products retrieved successfully',
+      data,
+    };
+  }
+}
+
+function sleep(duration: number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, duration);
+  });
 }

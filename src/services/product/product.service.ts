@@ -29,4 +29,17 @@ export class ProductService {
       .limit(6)
       .exec();
   }
+
+  async findRecommendedProducts(
+    page: number,
+    limit: number,
+  ): Promise<Product[]> {
+    const skip = (page - 1) * limit;
+    return this.productModel
+      .find({ isRecommended: true })
+      .sort({ createdAt: -1 })
+      .skip(skip) // 跳过指定的条数
+      .limit(limit) //  限制返回的条数
+      .exec();
+  }
 }
