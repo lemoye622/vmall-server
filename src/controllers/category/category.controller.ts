@@ -30,4 +30,15 @@ export class CategoryController {
       data,
     };
   }
+
+  @Get('products')
+  async findCategoriesWithProducts(): Promise<HttpResponse<Category[]>> {
+    let data: Category[] =
+      await this.categoryService.findCategoriesWithProducts(2);
+    return {
+      success: true,
+      message: 'Categories retrieved successfully',
+      data,
+    };
+  }
 }
